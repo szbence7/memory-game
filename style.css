@@ -1,0 +1,18 @@
+html, body {
+    width: 500px;
+    margin: auto;
+    overflow: hidden;
+    text-align: center;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+img {
+    height: 100px;
+    width: 22%;
+    height: auto;
+    margin: 5px;
+}
