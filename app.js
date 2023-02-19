@@ -1,5 +1,4 @@
 if (addToHomeScreen) {
-    // Az oldal megnyitása teljes képernyő módban
     document.documentElement.requestFullscreen();
   }
 
