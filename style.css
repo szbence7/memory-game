@@ -23,8 +23,7 @@ body {
   }
 
   img {
-    width: 50px;
-    height: auto;
+    width: 15%;
     margin: 5px;
   }
 
@@ -48,9 +47,45 @@ body {
     border-radius: 5px;
     width: 25%;
    }
+   #playnow {
+    width: 50%;
+    height: 10%;
+    font-weight: bold;
+    font-size: 1.2rem;
+   }
+
+   #author {
+    align-self: flex-end;
+    position: absolute;
+    bottom: 0px;
+   }
+
+   #author > a {
+    text-decoration: none;
+    color: white;
+   }
 }
 
+#welcome {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.505);
+    width: 100%;
+    height: 100%;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
 
+h1, button#welcome {
+    padding: 80px;
+}
+
+.blur {
+    filter: blur(10px);
+    transition: transform 0.5s ease-in-out;
+}
 
   
   .pyro > .before, .pyro > .after {
