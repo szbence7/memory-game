@@ -102,6 +102,15 @@ if (cardChosenIds[0] === cardChosenIds[1]) {
     resultDisplay.textContent = "Congratulations! You won!";
     document.querySelector('h2').innerHTML = resultDisplay.textContent
     gridDisplay.parentNode.removeChild(gridDisplay);
+    fwContainer = document.createElement('div');
+    fw = document.createElement('div');
+    fw2 = document.createElement('div');
+    fwContainer.setAttribute('class', 'pyro');
+    fw.setAttribute('class', 'before');
+    fw2.setAttribute('class', 'after');
+    document.body.appendChild(fwContainer);
+    fwContainer.appendChild(fw)
+    fwContainer.appendChild(fw2)
   } 
 }
 
