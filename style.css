@@ -1,48 +1,51 @@
 html,
 body {
   margin: auto;
-  overflow: hidden;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: 'Open Sans', sans-serif;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(100deg,#FFC300, #C70039);
 }
 
 #grid {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: rgba(62, 60, 60, 0.476);
-  width: 90%;
-  justify-content: center;
-  border-radius: 5px;
-  padding: 15px;
-}
-
-img {
-  height: 100px;
-  width: 25%;
-  height: auto;
-  margin: 5px;
-}
-
-@media screen and (max-width: 800px) {
-   html, body {
-    background-image: linear-gradient(100deg,#FFC300, #C70039);
-    height: 100%;
-   }
-   img {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(62, 60, 60, 0.476);
+    width: 90%;
+    justify-content: center;
     border-radius: 5px;
+    padding: 15px;
+  }
+
+  img {
+    width: 50px;
+    height: auto;
+    margin: 5px;
+  }
+
+  button {
     width: 25%;
-   }
-   button {
-    width: 25%;
-    margin: auto;
     padding: 20px;
     border-radius: 5px;
     margin-bottom: 50px;
     border: 0;
     background: #FF5733;
+    margin-top: 10px;
+   }
+
+@media screen and (max-width: 780px) {
+   html, body {
+    background-image: linear-gradient(100deg,#FFC300, #C70039);
+    height: 100%;
+    overflow: hidden;
+   }
+   img {
+    border-radius: 5px;
+    width: 25%;
    }
 }

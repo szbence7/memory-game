@@ -76,6 +76,8 @@ if (cardChosenIds[0] === cardChosenIds[1]) {
     cards[cardChosenIds[0]].setAttribute("src", "img/cardback.png");
     cards[cardChosenIds[1]].setAttribute("src", "img/cardback.png");
     alert("You clicked the same image!");
+    cardChosen = [];
+    cardChosenIds = [];
 }
 
   if (cardChosen[0] == cardChosen[1]) {
@@ -85,11 +87,13 @@ if (cardChosenIds[0] === cardChosenIds[1]) {
     cards[cardChosenIds[0]].removeEventListener("click", flipCard);
     cards[cardChosenIds[1]].removeEventListener("click", flipCard);
     cardWon.push(cardChosen);
+    console.log(cardWon.length);
     resultDisplay.innerHTML = cardWon.length;
+    console.log('You found a match!');
   } else {
     cards[cardChosenIds[0]].setAttribute("src", "img/cardback.png");
     cards[cardChosenIds[1]].setAttribute("src", "img/cardback.png");
-    alert("Try again!");
+    /* alert("Try again!"); */
   }
   cardChosen = [];
   cardChosenIds = [];
@@ -97,6 +101,7 @@ if (cardChosenIds[0] === cardChosenIds[1]) {
   if (cardWon.length === cardArray.length / 2) {
     resultDisplay.textContent = "Congratulations! You won!";
     document.querySelector('h2').innerHTML = resultDisplay.textContent
+    gridDisplay.parentNode.removeChild(gridDisplay);
   } 
 }
 
@@ -107,7 +112,7 @@ function flipCard() {
   console.log(cardChosen);
   this.setAttribute("src", cardArray[cardId].img);
   if (cardChosen.length === 2) {
-    setTimeout(checkMatch, 500);
+    setTimeout(checkMatch, 200);
   }
 }
 
