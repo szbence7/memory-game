@@ -7,23 +7,36 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Open Sans', sans-serif;
-  height: 100%;
-  width: 100%;
   background-image: linear-gradient(100deg,#FFC300, #C70039);
+  height: 100vh;
+  overflow: hidden;
+}
+
+#welcome {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.505);
+    width: 100%;
+    height: 100%;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
 }
 
 #grid {
     display: flex;
     flex-wrap: wrap;
     background-color: rgba(62, 60, 60, 0.476);
-    width: 90%;
     justify-content: center;
     border-radius: 5px;
     padding: 15px;
+    width: 50%;
   }
 
   img {
-    width: 15%;
+    width: 22%;
     margin: 5px;
   }
 
@@ -38,7 +51,12 @@ body {
     color: white;
    }
 
-@media screen and (max-width: 780px) {
+   #author > a {
+    text-decoration: none;
+    color: white;
+   }
+
+@media screen and (max-width: 760px) {
    html, body {
     background-image: linear-gradient(100deg,#FFC300, #C70039);
     height: 100%;
@@ -46,7 +64,7 @@ body {
    }
    img {
     border-radius: 5px;
-    width: 25%;
+    width: 28%;
    }
    #playnow {
     width: 50%;
@@ -58,23 +76,9 @@ body {
    #author {
     align-self: flex-end;
    }
-
-   #author > a {
-    text-decoration: none;
-    color: white;
+   #grid {
+    width: 80%;
    }
-}
-
-#welcome {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.505);
-    width: 100%;
-    height: 100%;
-    color: white;
-    justify-content: center;
-    align-items: center;
 }
 
 h1, button#welcome {
