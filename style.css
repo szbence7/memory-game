@@ -60,6 +60,7 @@ body {
    html, body {
     background-image: linear-gradient(100deg,#FFC300, #C70039);
     height: 100%;
+    width: 100%;
     overflow: hidden;
    }
    img {
