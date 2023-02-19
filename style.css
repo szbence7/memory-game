@@ -35,6 +35,7 @@ body {
     border: 0;
     background: #FF5733;
     margin-top: 10px;
+    color: white;
    }
 
 @media screen and (max-width: 780px) {
