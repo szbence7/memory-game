@@ -1,7 +1,3 @@
-if (addToHomeScreen) {
-    document.documentElement.requestFullscreen();
-  }
-
 const cardArray = [
   {
     name: "cherries",
