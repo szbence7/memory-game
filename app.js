@@ -1,3 +1,12 @@
+if (window.navigator.standalone === false) {
+  var addToHomeScreen = confirm("Az oldalt teljes képernyő módban szeretnéd megjeleníteni?");
+  if (addToHomeScreen) {
+    // Az oldal megnyitása teljes képernyő módban
+    document.documentElement.requestFullscreen();
+  }
+}
+
+
 const cardArray = [
   {
     name: "cherries",
