@@ -114,7 +114,7 @@ if (cardChosenIds[0] === cardChosenIds[1]) {
   cardChosenIds = [];
 
   if (cardWon.length === cardArray.length / 2) {
-    resultDisplay.textContent = "Congratulations! You won!";
+    resultDisplay.textContent = "Congratulations! You win!";
     document.querySelector('h2').innerHTML = resultDisplay.textContent
     gridDisplay.parentNode.removeChild(gridDisplay);
     fwContainer = document.createElement('div');
