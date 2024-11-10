@@ -20,22 +20,70 @@
   </head>
   <body>
     <h2>Settings</h2>
-    <p style="text-align: center; color: white; font-style: italic;">Coming soon...</p>
+    
+    <div class="settings-container">
+        <div class="setting-item">
+            <h3>Player Name Settings</h3>
+            <div class="name-display" id="nameDisplay">
+                Current Name: <span id="currentPlayerName">None</span>
+            </div>
+            <div class="name-input-container">
+                <input 
+                    type="text" 
+                    id="playerNameInput" 
+                    placeholder="Enter your name"
+                    maxlength="20"
+                >
+                <button id="saveNameBtn" onclick="saveNewName()">Save Name</button>
+                <button id="clearNameBtn" onclick="clearPlayerName()">Clear Name</button>
+            </div>
+        </div>
+    </div>
     
     <nav class="mobile-navbar">
-      <a href="index.html" class="nav-item">
-          <i class="fas fa-rocket"></i>
-          <span>Game</span>
-      </a>
-      <a href="leaderboard.html" class="nav-item">
-          <i class="fas fa-table"></i>
-          <span>Leaderboard</span>
-      </a>
-      <a href="settings.html" class="nav-item active">
-          <i class="fas fa-cog"></i>
-          <span>Settings</span>
-      </a>
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-rocket"></i>
+            <span>Game</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-table"></i>
+            <span>Leaderboard</span>
+        </a>
+        <a href="settings.html" class="nav-item active">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
     </nav>
-    <script src="app.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNameDisplay();
+        });
+
+        function updateNameDisplay() {
+            const savedName = localStorage.getItem('playerName');
+            document.getElementById('currentPlayerName').textContent = savedName || 'None';
+        }
+
+        function saveNewName() {
+            const nameInput = document.getElementById('playerNameInput');
+            const newName = nameInput.value.trim();
+            
+            if (newName) {
+                localStorage.setItem('playerName', newName);
+                updateNameDisplay();
+                nameInput.value = '';
+                alert('Name saved successfully!');
+            } else {
+                alert('Please enter a valid name!');
+            }
+        }
+
+        function clearPlayerName() {
+            localStorage.removeItem('playerName');
+            updateNameDisplay();
+            alert('Saved name has been cleared!');
+        }
+    </script>
   </body>
 </html>

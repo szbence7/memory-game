@@ -1,8 +1,11 @@
+// Kommenteld ki vagy töröld ezt a részt fejlesztés közben
+/*
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('/service-worker.js')
     .then(() => { console.log('Service Worker Registered'); });
 }
+*/
 
 const cardArray = [
   {
@@ -64,14 +67,36 @@ const restartButton = document.getElementById("restart");
 const welcome = document.getElementById("welcome");
 let cardChosen = [];
 let cardChosenIds = [];
-const cardWon = [];
-resultDisplay.innerHTML = cardWon.length;
+let cardsWon = [];
+resultDisplay.innerHTML = cardsWon.length;
 let isProcessing = false;
 let startTime;
 let moves = 0;
 let gameInProgress = false;
 
+// Játékos neve változó
+let playerName = null;
+
+// Név kezelő függvények
+function savePlayerName(name) {
+    if (name && name.trim() !== '') {
+        localStorage.setItem('playerName', name.trim());
+    }
+}
+
+function getPlayerName() {
+    return localStorage.getItem('playerName');
+}
+
 function start () {
+    const playerName = getPlayerName();
+    if (playerName) {
+        document.querySelector("h2").textContent = `Welcome back, ${playerName}!`;
+        setTimeout(() => {
+            document.querySelector("h2").textContent = "Matches: 0/8";
+        }, 2000);
+    }
+    
     gridDisplay.classList.remove("blur")
     resultDisplay.classList.remove("blur")
     restartButton.classList.remove("blur")
@@ -102,31 +127,65 @@ function checkMatch() {
     const optionTwoId = cardChosenIds[1];
 
     if (optionOneId == optionTwoId) {
-        cards[optionOneId].setAttribute("src", "img/blank.png");
-        cards[optionTwoId].setAttribute("src", "img/blank.png");
+        cards[optionOneId].setAttribute("src", "img/cardback.png");
+        cards[optionTwoId].setAttribute("src", "img/cardback.png");
         alert("You have clicked the same image!");
     }
 
     if (cardChosen[0] == cardChosen[1]) {
-        cards[optionOneId].setAttribute("src", "img/white.png");
-        cards[optionTwoId].setAttribute("src", "img/white.png");
+        cards[optionOneId].setAttribute("src", "img/bw.png");
+        cards[optionTwoId].setAttribute("src", "img/bw.png");
         cards[optionOneId].removeEventListener("click", flipCard);
         cards[optionTwoId].removeEventListener("click", flipCard);
-        cardWon.push(cardChosen);
+        cardsWon.push(cardChosen);
     } else {
-        cards[optionOneId].setAttribute("src", "img/blank.png");
-        cards[optionTwoId].setAttribute("src", "img/blank.png");
+        cards[optionOneId].setAttribute("src", "img/cardback.png");
+        cards[optionTwoId].setAttribute("src", "img/cardback.png");
     }
-    resultDisplay.textContent = cardWon.length;
+    resultDisplay.textContent = cardsWon.length;
 
     cardChosen = [];
     cardChosenIds = [];
 
-    if (cardWon.length === cardArray.length / 2) {
-        const gameStats = calculateScore();
-        const playerName = prompt("Congratulations! Enter your name for the leaderboard:");
+    if (cardsWon.length === cardArray.length / 2) {
+        const timeSpent = Math.floor((Date.now() - startTime) / 1000);
+        const score = calculateScore(cardsWon.length, moves, timeSpent);
+        
+        let playerName = localStorage.getItem('playerName');
+        
+        if (!playerName) {
+            playerName = prompt("Congratulations! Enter your name for the leaderboard:");
+            if (playerName) {
+                localStorage.setItem('playerName', playerName);
+            }
+        }
+        
         if (playerName) {
-            saveScore(playerName, gameStats);
+            fetch('save_score.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: playerName,
+                    score: score,
+                    moves: moves,
+                    time: timeSpent
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Congratulations ${playerName}! Your rank: ${data.rank}`);
+                } else {
+                    console.error('Error saving score:', data.error);
+                    alert('Failed to save score: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to save score. Network error.');
+            });
         }
     }
 }
@@ -154,27 +213,11 @@ function flipCard() {
   }
 }
 
-function calculateScore() {
-    const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
-    const baseScore = 1000;
-    const movesPenalty = moves * 10;
-    const timePenalty = timeInSeconds;
-    
-    let bonusPoints = 0;
-    if (moves === cardArray.length) {
-        bonusPoints += 500;
-    }
-    if (timeInSeconds < 30) {
-        bonusPoints += 300;
-    }
-
-    const finalScore = Math.max(0, baseScore - movesPenalty - timePenalty + bonusPoints);
-    return {
-        score: finalScore,
-        moves: moves,
-        time: timeInSeconds,
-        date: new Date().toISOString()
-    };
+function calculateScore(matches, moves, time) {
+    const baseScore = matches * 100;
+    const movesPenalty = moves * 5;
+    const timePenalty = time * 2;
+    return Math.max(0, baseScore - movesPenalty - timePenalty);
 }
 
 function saveScore(playerName, gameStats) {

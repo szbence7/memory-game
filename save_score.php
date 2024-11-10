@@ -2,11 +2,24 @@
 header('Content-Type: application/json');
 require_once 'config.php';
 
-$data = json_decode(file_get_contents('php://input'), true);
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Log the incoming data
+$rawData = file_get_contents('php://input');
+error_log('Received data: ' . $rawData);
+
+$data = json_decode($rawData, true);
 
 if (isset($data['name']) && isset($data['score']) && isset($data['moves']) && isset($data['time'])) {
     try {
-        // Először mentsük el az új pontszámot
+        // Validate data types
+        $name = trim($data['name']);
+        $score = intval($data['score']);
+        $moves = intval($data['moves']);
+        $time = intval($data['time']);
+
         $stmt = $conn->prepare("INSERT INTO leaderboard (name, score, moves, time) VALUES (?, ?, ?, ?)");
         if (!$stmt) {
             error_log("Prepare failed: " . $conn->error);
@@ -14,18 +27,12 @@ if (isset($data['name']) && isset($data['score']) && isset($data['moves']) && is
             exit;
         }
 
-        $stmt->bind_param("siii", 
-            $data['name'], 
-            $data['score'], 
-            $data['moves'], 
-            $data['time']
-        );
+        $stmt->bind_param("siii", $name, $score, $moves, $time);
         
         if ($stmt->execute()) {
-            // Most nézzük meg, hanyadik helyen áll
             $rankQuery = "SELECT COUNT(*) + 1 as rank FROM leaderboard WHERE score > ?";
             $rankStmt = $conn->prepare($rankQuery);
-            $rankStmt->bind_param("i", $data['score']);
+            $rankStmt->bind_param("i", $score);
             $rankStmt->execute();
             $result = $rankStmt->get_result();
             $rank = $result->fetch_assoc()['rank'];
@@ -46,7 +53,7 @@ if (isset($data['name']) && isset($data['score']) && isset($data['moves']) && is
         echo json_encode(['success' => false, 'error' => $e->getMessage()]);
     }
 } else {
-    error_log("Missing data fields");
+    error_log("Missing data fields in: " . print_r($data, true));
     echo json_encode(['success' => false, 'error' => 'Missing required fields']);
 }
 

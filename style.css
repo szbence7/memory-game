@@ -204,3 +204,81 @@ h1, button#welcome {
     padding: 20px;
     border-radius: 10px;
 }
+
+.settings-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.setting-item {
+    text-align: center;
+    color: white;
+    margin: 20px 0;
+}
+
+.setting-item h3 {
+    margin-bottom: 15px;
+}
+
+.name-display {
+    margin: 15px 0;
+    font-size: 1.1em;
+}
+
+.name-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#playerNameInput {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1em;
+}
+
+#saveNameBtn, #clearNameBtn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+
+#saveNameBtn {
+    background: #4CAF50;
+    color: white;
+}
+
+#saveNameBtn:hover {
+    background: #45a049;
+}
+
+#clearNameBtn {
+    background: #C70039;
+    color: white;
+}
+
+#clearNameBtn:hover {
+    background: #A5002F;
+}
+
+@media screen and (min-width: 768px) {
+    .name-input-container {
+        flex-direction: row;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    #playerNameInput {
+        width: 200px;
+    }
+}

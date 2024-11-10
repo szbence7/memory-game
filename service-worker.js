@@ -15,10 +15,9 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => response || fetch(e.request)),
-  );
+  e.respondWith(fetch(e.request));
 });
+
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
