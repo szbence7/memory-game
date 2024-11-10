@@ -15,7 +15,7 @@
     <title>Memory Game - Settings</title>
     <meta name="apple-mobile-web-app-title" content="Ben'sMemory Game">
     <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="theme-color" content="linear-gradient(100deg, #FFC300, #C70039)">
+    <meta name="theme-color" content="black-translucent">
     <link rel="manifest" href="manifest.json">
   </head>
   <body>
@@ -34,8 +34,10 @@
                     placeholder="Enter your name"
                     maxlength="20"
                 >
-                <button id="saveNameBtn" onclick="saveNewName()">Save Name</button>
-                <button id="clearNameBtn" onclick="clearPlayerName()">Clear Name</button>
+                <div class="button-container">
+                    <button id="saveNameBtn" onclick="saveNewName()">Save Name</button>
+                    <button id="clearNameBtn" onclick="clearPlayerName()">Clear Name</button>
+                </div>
             </div>
         </div>
     </div>
@@ -62,7 +64,14 @@
 
         function updateNameDisplay() {
             const savedName = localStorage.getItem('playerName');
-            document.getElementById('currentPlayerName').textContent = savedName || 'None';
+            const nameDisplay = document.getElementById('nameDisplay');
+            
+            if (savedName) {
+                document.getElementById('currentPlayerName').textContent = savedName;
+                nameDisplay.style.display = 'block';
+            } else {
+                nameDisplay.style.display = 'none';
+            }
         }
 
         function saveNewName() {
