@@ -1,8 +1,8 @@
 function getRankDisplay(index) {
     switch(index) {
-        case 0: return '🥇 1';
-        case 1: return '🥈 2';
-        case 2: return '🥉 3';
+        case 0: return '🥇';
+        case 1: return '🥈';
+        case 2: return '🥉';
         default: return `${index + 1}`;
     }
 }
