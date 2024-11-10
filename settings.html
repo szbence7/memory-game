@@ -3,36 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="shortcut icon" type="image/x-icon" href="/img/icon.png?">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>Memory Game</title>
+    <title>Memory Game - Settings</title>
     <meta name="apple-mobile-web-app-title" content="Ben'sMemory Game">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="theme-color" content="linear-gradient(100deg, #FFC300, #C70039)">
     <link rel="manifest" href="manifest.json">
   </head>
   <body>
-    <h2>Matches: <span id="result"></span>/8</h2>
-    <div id="grid"></div>
-    <button id="restart" onclick="restart()">Restart</button>
-    <div id="welcome">
-        <h1>Welcome to my Memory Game</h1>
-        <button id="playnow" onclick="start()">Play Now</button>
-        <div id="author">by: <a href="https://github.com/szbence7">Bence</a></div>
-        
-    </div>
+    <h2>Settings</h2>
+    <p style="text-align: center; color: white; font-style: italic;">Coming soon...</p>
+    
     <nav class="mobile-navbar">
-      <a href="index.html" class="nav-item active">
+      <a href="index.html" class="nav-item">
           <i class="fas fa-rocket"></i>
           <span>Game</span>
       </a>
@@ -40,11 +31,11 @@
           <i class="fas fa-table"></i>
           <span>Leaderboard</span>
       </a>
-      <a href="settings.html" class="nav-item">
+      <a href="settings.html" class="nav-item active">
           <i class="fas fa-cog"></i>
           <span>Settings</span>
       </a>
-  </nav>
+    </nav>
     <script src="app.js"></script>
   </body>
 </html>
